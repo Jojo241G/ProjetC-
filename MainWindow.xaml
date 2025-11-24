@@ -1,0 +1,133 @@
+﻿<Window x:Class="Pressing_Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Diamond Pressing" Height="650" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Background="#0F172A">
+
+    <Window.Resources>
+
+        <!-- Style bouton moderne -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Background" Value="#60A5FA"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- Animation slide -->
+        <Storyboard x:Key="SlideMenuIn">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="-250" To="0" Duration="0:0:0.25" />
+        </Storyboard>
+
+        <Storyboard x:Key="SlideMenuOut">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="0" To="-250" Duration="0:0:0.25" />
+        </Storyboard>
+
+    </Window.Resources>
+
+
+    <!-- ===========================
+           STRUCTURE PRINCIPALE
+         =========================== -->
+    <Grid>
+
+        <!-- ========== COLONNES ========== -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1100"/>
+            <!-- Menu -->
+            <!-- Contenu -->
+        </Grid.ColumnDefinitions>
+
+        <!-- ========== MENU LATERAL ========== -->
+        <Border x:Name="SideMenu"
+                Grid.Column="0"
+                Width="250"
+                Background="#1E40AF"
+                RenderTransformOrigin="0.5,0.5" Margin="0,0,850,0">
+            <Border.RenderTransform>
+                <TranslateTransform X="-250"/>
+            </Border.RenderTransform>
+
+            <StackPanel Margin="15">
+                <TextBlock Text="Diamond Pressing"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,20,0,40"/>
+
+                <Button Content="🏷 Enregistrer commande"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenRegister"/>
+
+                <Button Content="🔍 Rechercher commande (code)"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenSearch"/>
+
+                <Button Content="📛 Rechercher code (nom/téléphone)"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenSearchByClient"/>
+
+                <Button Content="📄 Liste des commandes"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenList"/>
+
+                <Button Content="✔ Récupérer commande"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenRecover"/>
+
+                <Button Content="❌ Annuler commande"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenCancel"/>
+
+                <Button Content="📊 Statistiques"
+                        Style="{StaticResource ModernButton}"
+                        Click="OpenStats"/>
+            </StackPanel>
+        </Border>
+
+
+        <!-- ========== BOUTON ≡ ========== -->
+        <Button x:Name="BtnToggleMenu"
+                Width="50"
+                Height="50"
+                Background="#1E40AF"
+                Foreground="White"
+                FontSize="26"
+                Content="≡"
+                BorderThickness="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,10,0,0"
+                Panel.ZIndex="10"
+                Click="BtnToggleMenu_Click"/>
+
+
+        <!-- ========== CONTENU PRINCIPAL ========== -->
+        <Border x:Name="MainArea"
+                Background="#0F172A"
+                CornerRadius="15"
+                Margin="270,20,20,20"
+                Padding="20">
+
+            <Grid>
+                <TextBlock x:Name="TitleBlock"
+                           Text="Bienvenue dans Diamond Pressing"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="10"/>
+
+                <StackPanel x:Name="ContentPanel"
+                            Margin="0,60,0,0"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</Window>
